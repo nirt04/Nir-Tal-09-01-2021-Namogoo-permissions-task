@@ -1,9 +1,4 @@
 const XLSX = require('xlsx');
-const path = require('path');
-
-const GET_APP_DIR = () => {
-  return path.dirname(require.main.filename);
-};
 
 const getWorkSheetsFromFile = (path) => {
   const workbot = XLSX.readFile(path);
@@ -15,13 +10,9 @@ const getWorkSheetsFromFile = (path) => {
 };
 
 const getAllLeafs = (tree, kinds) => {
- // TODO 
-
-
-  
+  // TODO
 };
 module.exports = {
   getAllLeafs,
   getWorkSheetsFromFile,
-  GET_APP_DIR,
 };
