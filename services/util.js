@@ -1,17 +1,27 @@
-// import xlsx from 'node-xlsx';
-const xlsx = require('node-xlsx').default;
+const XLSX = require('xlsx');
+const path = require('path');
 
-// Parse a buffer
-// const workSheetsFromBuffer = xlsx.parse(fs.readFileSync(`${__dirname}/myFile.xlsx`));
-// Parse a file
-const getWorkSheetsFromFile = (path) => {
-  const workSheetsFromFile = xlsx.parse(path);
-  return workSheetsFromFile;
+const GET_APP_DIR = () => {
+  return path.dirname(require.main.filename);
 };
+
+const getWorkSheetsFromFile = (path) => {
+  const workbot = XLSX.readFile(path);
+  let worksheets = {};
+  for (const sheetName of workbot.SheetNames) {
+    worksheets[sheetName] = XLSX.utils.sheet_to_json(workbot.Sheets[sheetName]);
+  }
+  return worksheets;
+};
+
 const getAllLeafs = (tree, kinds) => {
-  console.log('hello getAllLeafs');
+ // TODO 
+
+
+  
 };
 module.exports = {
   getAllLeafs,
   getWorkSheetsFromFile,
+  GET_APP_DIR,
 };
