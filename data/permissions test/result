@@ -1,0 +1,18 @@
+{
+  1: {
+    CHPOverview: 'admin',
+    CHPInjections: 'admin',
+    CHPScreenshots: 'admin',
+    CHPKnowledgeHub: 'admin',
+    SegmentAnalysis: 'member',
+    PrivacyOverview‫:‬ 'member',
+    PrivacyVendors: 'member',
+    PrivacyManagement: 'member',
+    ServiceCoverageOverview: 'member',
+    ServiceCoverageSettings: 'member',
+  },
+  2: {
+    ...
+    ...
+  }
+}
