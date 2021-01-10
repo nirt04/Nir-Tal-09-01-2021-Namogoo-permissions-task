@@ -9,28 +9,24 @@ const getWorkSheetsFromFile = (path) => {
   return worksheets;
 };
 
-const getPremissionOfUser = (userPermissons, tree) => {
-  let userPremissionsExpanded = {};
-  const getAllLeafsOfNode = (node) => {
-    // TODO RUN OVER BINARY TREE AND GET ALL LEAFS
-  };
+const getAllUsersPermissions = (tree, userPermissons) => {
+  let results = {};
+  const history = {};
+  tree.forEach((treeNode) => {
+    const match = userPermissons.find((e) => e.permission === treeNode.permission);
+    if (match) {
+      if (results[match.userId] === undefined) results[match.userId] = {};
 
-  // TODO Loop over tree and for each node loop the userPermissons and ask:
-
-  // 1. is it match? Great lets continue.
-  // 2. is it leaf? OK GO TO userPremissionsExpanded!
-  // 3. is it root? OK EXCUTE getAllLeafsOfNode(<NODE>) and store all of them in userPremissionsExpanded but before:...
-  //      a. since we expanded all the node and got all his leafs there is a big chance that on of the next user premissions that we attend to loop over is already added to the userPremissionsExpanded.
-  //      so before we store all of them in userPremissionsExpanded we delete all of them from userPermissons so we wont have to loop over things we already have.
-
-  return { userPermissons, tree };
+      results[match.userId][treeNode.permission] = match.role;
+      if (history[treeNode.permission_ref]) { results[match.userId][treeNode.permission_ref] = match.role; }
+    } else {
+      history[treeNode.permission] = treeNode;
+    }
+  });
+  return results;
 };
 
-const getAllLeafs = (tree, kinds) => {
-  // TODO
-};
 module.exports = {
-  getAllLeafs,
   getWorkSheetsFromFile,
-  getPremissionOfUser,
+  getAllUsersPermissions,
 };
