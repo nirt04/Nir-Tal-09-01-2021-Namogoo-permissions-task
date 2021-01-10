@@ -16,6 +16,7 @@ function permissions(app) {
       );
       res.status('200').send(USER_PERMISSIONS);
     } catch (error) {
+      debugger;
       console.log('error', error);
     }
   });
