@@ -12,15 +12,15 @@ const getWorkSheetsFromFile = (path) => {
 const getAllUsersPermissions = (tree, userPermissons) => {
   let results = {};
   const history = {};
-  tree.forEach((treeNode) => {
-    const match = userPermissons.find((e) => e.permission === treeNode.permission);
+  tree.forEach((node) => {
+    const match = userPermissons.find((e) => e.permission === node.permission);
     if (match) {
       if (results[match.userId] === undefined) results[match.userId] = {};
 
-      results[match.userId][treeNode.permission] = match.role;
-      if (history[treeNode.permission_ref]) { results[match.userId][treeNode.permission_ref] = match.role; }
+      results[match.userId][node.permission] = match.role;
+      if (history[node.permission_ref]) { results[match.userId][node.permission_ref] = match.role; }
     } else {
-      history[treeNode.permission] = treeNode;
+      history[node.permission] = node;
     }
   });
   return results;
