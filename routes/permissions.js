@@ -8,7 +8,7 @@ const users_worksheet = util.getWorkSheetsFromFile(
 );
 
 function permissions(app) {
-  app.get('/get-premission-of-users', async (req, res) => {
+  app.get('/get-permission-of-users', async (req, res) => {
     try {
       const USER_PERMISSIONS = util.getAllUsersPermissions(
         permissions_worksheet.authTree,
