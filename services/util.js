@@ -41,7 +41,7 @@ const treeMap = (tree) => {
 const conta = (target) => {
   const results = [];
   const getAllSubNodes = (node) => {
-    results.push(node);
+    if (node.children.length === 0) results.push(node);
     if (node.children) {
       node.children.forEach((child) => {
         getAllSubNodes(child);
@@ -53,30 +53,37 @@ const conta = (target) => {
 };
 const findValueInTree = (tree, value) => {
   let result = null;
-  const innerFunction = (node) => {
+  const recursive = (node) => {
     if (node.value === value) return node;
     else if (node.children) {
       node.children.forEach((child) => {
-        innerFunction(child);
+        recursive(child);
       });
     }
   };
   Object.keys(tree).forEach((key) => {
-    if (result) debugger;
-
-    if (!result) result = innerFunction(tree[key]);
+    if (!result) result = recursive(tree[key]);
   });
   return result;
 };
 const getAllUsersPermissions = (tree, userPermissons) => {
   const _treeMap = treeMap(tree);
-  let results = [];
+  let results = {};
   const history = {};
 
   userPermissons.forEach((permission) => {
     const match = findValueInTree(_treeMap, permission.permission);
-    if (match) results = [...results, ...conta(match)];
+    if (!results[permission.userId]) results[permission.userId] = {};
+    if (match) {
+      const aa = conta(match);
+      // results = [...results, ...aa];
+      aa.forEach((result) => {
+        // debugger;
+        results[permission.userId][result.value] = permission.role;
+      });
+    }
   });
+  debugger;
   return results;
   tree.forEach((node) => {
     const match = userPermissons.find((e) => e.permission === node.permission);
