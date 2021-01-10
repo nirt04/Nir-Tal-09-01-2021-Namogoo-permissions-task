@@ -39,6 +39,7 @@ const treeMap = (tree) => {
   });
   return map;
 };
+
 const getAllSubPermissions = (target) => {
   const results = [];
   const getAllSubNodes = (node) => {
