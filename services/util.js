@@ -56,16 +56,17 @@ const getAllSubPermissions = (target) => {
 
 const findValueInTree = (tree, value) => {
   let result = null;
-  const recursive = (node) => {
-    if (node.value === value) return node;
+  const recursive = (node, key) => {
+    if (node.value === value) return (result = node);
     else if (node.children) {
       node.children.forEach((child) => {
         recursive(child);
       });
     }
   };
+
   Object.keys(tree).forEach((key) => {
-    if (!result) result = recursive(tree[key]);
+    if (!result) recursive(tree[key], key);
   });
   return result;
 };
@@ -83,7 +84,7 @@ const getAllUsersPermissions = (tree, userPermissons) => {
       });
     }
   });
-  return results;
+  return { results, tree, userPermissons };
 };
 
 module.exports = {
