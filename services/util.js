@@ -84,7 +84,7 @@ const getAllUsersPermissions = (tree, userPermissons) => {
       });
     }
   });
-  return { results, tree, userPermissons };
+  return results;
 };
 
 module.exports = {
