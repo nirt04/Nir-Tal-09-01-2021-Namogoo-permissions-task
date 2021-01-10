@@ -56,7 +56,7 @@ const getAllSubPermissions = (target) => {
 
 const findValueInTree = (tree, value) => {
   let result = null;
-  const recursive = (node, key) => {
+  const recursive = (node) => {
     if (node.value === value) return (result = node);
     else if (node.children) {
       node.children.forEach((child) => {
@@ -66,7 +66,7 @@ const findValueInTree = (tree, value) => {
   };
 
   Object.keys(tree).forEach((key) => {
-    if (!result) recursive(tree[key], key);
+    if (!result) recursive(tree[key]);
   });
   return result;
 };
