@@ -1,10 +1,10 @@
-const premissions = require('./permissions');
+const permissions = require('./permissions');
 
 function router(app) {
   app.get('/', (req, res) => {
     res.send('hello backend server');
   });
-  premissions(app);
+  permissions(app);
 }
 
 module.exports = router;
